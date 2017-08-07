@@ -1,0 +1,80 @@
+{block content}
+
+<div class="container text-center">
+  <div class="jumbotron">
+    <h1 n:block="title">Elektronická evidence kosmonautů</h1>     
+  </div>   
+</div>
+
+<div class="container">
+<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+</div>
+
+<div class="container">
+<button id="cosmo_form" onclick="VisibilityChange()" class="btn-block btn-primary">Přidat kosmonauta</button>
+<br>
+</div>
+
+<div id="insert_cosmo" class="container" style="display:none">		
+<form n:name=insertForm class=form>
+  <div class="form-group">
+    <label for="surname">Příjmení</label>
+    <input n:name=prijmeni class="form-control" id="surname" aria-describedby="emailHelp" placeholder="Zadejte příjmení">
+  </div>
+  <div class="form-group">
+    <label for="name">Jméno</label>
+    <input n:name=jmeno class="form-control" placeholder="Zadejte jméno">
+  </div>
+  <div class="form-group">
+    <label for="date">Datum narození</label>
+    <input n:name=datum_narozeni class="form-control" placeholder="dd.mm.rrrr">
+  </div>
+  <div class="form-group">
+    <label for="superpower">Superschopnost</label>
+    <input n:name=superschopnost class="form-control" placeholder="Zadejte superschopnost">
+  </div>
+  <button n:name=send type="submit" class="btn btn-success">Vložit kosmonauta</button>
+</form>
+<br>
+</div>	
+	
+	
+	
+<div class="container">
+	<table class="table table-striped">
+	<thead>
+      <tr>
+        <th>Příjmení</th>
+        <th>Jméno</th>
+        <th>Datum narození</th>
+		<th>Superschopnost</th>
+		<th></th>
+      </tr>
+    </thead>
+	<tbody>
+    {foreach $kosmonauti as $kosmonaut}
+	<tr>
+	<td>
+		{$kosmonaut->prijmeni}
+	</td>	
+	<td>
+		{$kosmonaut->jmeno}
+	</td>	
+	<td>
+		{$kosmonaut->datum_narozeni->format('Y-m-d')}
+	</td>	
+	<td>
+		{$kosmonaut->superschopnost}
+	</td>
+	<td>
+		<a n:href="smazatKosmonauta! $kosmonaut->id">
+			<img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA0NDMgNDQzIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NDMgNDQzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCI+CjxnPgoJPHBhdGggZD0iTTMyMS43ODUsMzhoLTgzLjM4NFYwSDEyNS4xNjl2MzhINDEuNzg1djYwaDI4MFYzOHogTTE1NS4xNjksMzBoNTMuMjMydjhoLTUzLjIzMlYzMHoiIGZpbGw9IiNEODAwMjciLz4KCTxwYXRoIGQ9Ik0yOTUuMTQyLDIxNC4zMWw1LjY2LTg2LjMxSDYyLjc2OWwxOS4wMTYsMjkwaDExNC4xNzJjLTE0Ljg2MS0yMS4wNjctMjMuNjAyLTQ2Ljc0Ni0yMy42MDItNzQuNDMgICBDMTcyLjM1NSwyNzQuNDMsMjI2Ljg0OSwyMTcuNzc5LDI5NS4xNDIsMjE0LjMxeiIgZmlsbD0iI0Q4MDAyNyIvPgoJPHBhdGggZD0iTTMwMS43ODUsMjQ0LjE0MWMtNTQuODI2LDAtOTkuNDMsNDQuNjA0LTk5LjQzLDk5LjQyOVMyNDYuOTU5LDQ0MywzMDEuNzg1LDQ0M3M5OS40My00NC42MDQsOTkuNDMtOTkuNDMgICBTMzU2LjYxMSwyNDQuMTQxLDMwMS43ODUsMjQ0LjE0MXogTTM1NS45NjEsMzc2LjUzM2wtMjEuMjEzLDIxLjIxM2wtMzIuOTYzLTMyLjk2M2wtMzIuOTYzLDMyLjk2M2wtMjEuMjEzLTIxLjIxM2wzMi45NjMtMzIuOTYzICAgbC0zMi45NjMtMzIuOTYzbDIxLjIxMy0yMS4yMTNsMzIuOTYzLDMyLjk2M2wzMi45NjMtMzIuOTYzbDIxLjIxMywyMS4yMTNsLTMyLjk2MywzMi45NjNMMzU1Ljk2MSwzNzYuNTMzeiIgZmlsbD0iI0Q4MDAyNyIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" />
+		</a>
+	</td>
+	</tr>
+    {/foreach}
+	</tbody>
+	</table>	
+</div>
+	
+{/block}

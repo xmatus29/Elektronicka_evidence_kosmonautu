@@ -1,0 +1,61 @@
+{**
+ * @param string   $basePath web base path
+ * @param array    $flashes  flash messages
+ *}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Sandbox</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{$basePath}/css/style.css">
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style>
+	/*** Flash message ***/
+		div.flash {
+		padding: .8em;
+		margin-bottom: 1em;
+		border: 2px solid #ddd;
+		background: #E6EFC2;
+		color: #264409;
+		border-color: #C6D880;
+		}
+	</style>
+	{block head}{/block}
+</head>
+
+<body>
+	{include content}
+
+	{block scripts}
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+	<script src="{$basePath}/js/main.js"></script>
+	<script type="text/javascript">
+    function VisibilityChange() {
+    	
+    	if (document.getElementById("insert_cosmo").style.display == "block") 
+    	{
+    		document.getElementById('insert_cosmo').style.display = 'none';
+    		document.getElementById('insert_cosmo').style.visibility = 'none';
+			document.getElementById('cosmo_form').innerHTML = 'Přidat kosmonauta';
+			document.getElementById('cosmo_form').className = 'btn-block btn-primary';
+    	}
+    	else 
+    	{
+    		document.getElementById('insert_cosmo').style.display = 'block';
+    		document.getElementById('insert_cosmo').style.visibility = 'visible';
+			document.getElementById('cosmo_form').innerHTML = 'Skrýt formulář';
+			document.getElementById('cosmo_form').className = 'btn-block btn-warning';
+    	}
+        
+    }
+	</script>
+	{/block}
+</body>
+</html>
